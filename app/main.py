@@ -3,6 +3,8 @@ from fastapi import FastAPI
 
 from app.config import get_settings
 
+from app.api.v1.routes import router as v1_router
+
 settings = get_settings()
 
 app = FastAPI(
@@ -10,6 +12,8 @@ app = FastAPI(
     description="RAG-система: вопросы по PDF-документам (локальные эмбеддинги)",
     version="0.1.0",
 )
+
+app.include_router(v1_router)
 
 
 @app.get("/health", tags=["system"])
