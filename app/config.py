@@ -19,14 +19,20 @@ class Settings(BaseSettings):
     # Эмбеддинги (всегда локальные)
     embedding_model_name: str = "paraphrase-multilingual-MiniLM-L12-v2"
 
-    # LLM (Шаг 4; пока dummy = возвращает заглушку)
     llm_provider: Literal["dummy", "local"] = "dummy"
+
+    # LocalLLM (используется при llm_provider="local")
+    local_llm_model: str = "Qwen/Qwen2.5-1.5B-Instruct"
+    local_llm_max_new_tokens: int = 512
+    local_llm_device: str = "cpu"  # "cuda" или "mps" если есть
 
     # RAG
     chroma_persist_dir: str = "./data/chroma"
     chunk_size: int = 1000
     chunk_overlap: int = 150
     retrieval_top_k: int = 4
+
+
 
 
 @lru_cache
